@@ -17,7 +17,6 @@
     "stric": true,
     "forceConsistentCasingInFilesNames": true,
     "resolveJsonModule": true,
-    "isolateModules": true,
     "noEmit": true
   },
   "include": [
