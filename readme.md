@@ -11,9 +11,7 @@
 
 ---
 
-## [**Link para o curso completo**](https://www.udemy.com/course/react-com-mango/?referralCode=552F88858EAE76346C8B)
-
-Essa sistema faz parte do treinamento do professor Rodrigo Manguinho (Mango) na Udemy.
+Esse sistema faz parte do treinamento do professor Rodrigo Manguinho (Mango).
 
 O objetivo do treinamento é mostrar como criar um sistema em ReactJs utilizando os novos Hooks, Recoil, com uma arquitetura bem definida e desacoplada, utilizando TDD (programação orientada a testes) como metodologia de trabalho, Clean Architecture para fazer a distribuição de responsabilidades em camadas, sempre seguindo os princípios do SOLID, DRY, YAGNI, KISS e aplicando Design Patterns para resolver alguns problemas comuns.
 
