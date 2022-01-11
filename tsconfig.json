@@ -7,10 +7,12 @@
       "esnext"
     ],
     "esModuleInterop": true,
-    "module": "esnext",
+    "module": "AMD",
     "jsx": "react",
+    "moduleResolution": "node",
     "rootDir": "src",
     "baseUrl": "src",
+    
     "paths" : {
       "@/*": ["*"]
     },
