@@ -1,5 +1,14 @@
 {
-  "extends" : "standard-with-typescript",
+  "settings": {
+    "react": {
+      "version": "16.8.6"
+    }
+  },
+  "extends" : [
+    "standard-with-typescript",
+    "plugin:react/recommended"
+ ],
+ "plugins" : ["react"],
   "parsedOptions":{
     "project": "./.tsconfig.json"
   },
@@ -9,6 +18,8 @@
     "@typescript-eslint/camelcase": "off",
     "@typescript-eslint/naming-convention": "warn",
     "@typescript-eslint/no-unused-vars": "off",
-    "isolatedModules": false
+    "react/jsx-uses-react": "error",  
+    "react/jsx-uses-vars": "error"
+    // "isolatedModules": false
   }
 }
