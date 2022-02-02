@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "jest --passWithNoTests",
+    "clear_jest": "jest --clearCache",
     "test:watch": "yarn test -- --watch",
     "test:staged": "yarn test -- --findRelatedTests",
     "test:ci": "yarn test -- ---coverage"
@@ -17,6 +18,8 @@
     "@types/faker": "^5.5.1",
     "@types/jest": "^26.0.23",
     "@types/node": "^14.14.34",
+    "@types/react": "^17.0.38",
+    "@types/react-dom": "^17.0.11",
     "@typescript-eslint/eslint-plugin": "^4.17.0",
     "eslint": "^7.22.0",
     "eslint-config-standard-with-typescript": "^11.0.1",
@@ -33,6 +36,8 @@
     "typescript": "^4.2.3"
   },
   "dependencies": {
-    "axios": "^0.24.0"
+    "axios": "^0.24.0",
+    "reac": "^0.0.0",
+    "react-dom": "^17.0.2"
   }
 }
