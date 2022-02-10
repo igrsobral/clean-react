@@ -33,6 +33,7 @@
     "eslint-plugin-standard": "^5.0.0",
     "faker": "^5.5.3",
     "git-commit-msg-linter": "^3.0.2",
+    "html-webpack-plugin": "^5.5.0",
     "husky": "^5.2.0",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^26.6.3",
@@ -43,13 +44,14 @@
     "ts-jest": "^26.5.4",
     "ts-loader": "^9.2.6",
     "typescript": "^4.2.3",
-    "webpack": "^5.68.0",
-    "webpack-cli": "^4.9.2",
-    "webpack-dev-server": "^4.7.3"
+    "webpack": "^^5.53.0",
+    "webpack-cli": "^4.8.0",
+    "webpack-dev-server": "^4.2.1",
+    "webpack-merge": "^5.1.4"
   },
   "dependencies": {
     "axios": "^0.24.0",
-    "reac": "^0.0.0",
+    "react": "^17.0.2",
     "react-dom": "^17.0.2"
   }
 }
