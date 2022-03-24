@@ -1,15 +1,8 @@
 import ReactDOM from 'react-dom'
 import React from 'react'
-
-
-export function App() {
-  return (
-    <div>Returnsasdasda</div>
-  )
-}
-
+import Login from '@/presentation/pages/login/login'
 
 ReactDOM.render(
-  <App />,
+  <Login />,
   document.getElementById('main')
 )
