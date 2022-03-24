@@ -1,5 +1,5 @@
 {
-  "compilerOptions":{
+  "compilerOptions": {
     "target": "es6",
     "lib": [
       "dom",
@@ -7,18 +7,30 @@
       "esnext"
     ],
     "esModuleInterop": true,
-    "module": "AMD",
-    "jsx": "react",
+    "module": "esnext",
     "moduleResolution": "node",
-    "rootDir": "src",
+    "jsx": "react",
+    "rootDirs": [
+      "src",
+      "tests"
+    ],
     "baseUrl": "src",
-    "paths" : {
-      "@/*": ["*"]
+    "paths": {
+      "@/*": [
+        "*"
+      ],
+      "@/tests/*": [
+        "../tests/*"
+      ]
     },
     "allowJs": true,
-    "resolveJsonModule": true,
+    "resolveJsonModule": true
   },
   "include": [
-    "src"
+    "src",
+    "tests"
+  ],
+  "exclude": [
+    "tests/e2e/cypress"
   ]
 }
