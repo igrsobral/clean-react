@@ -1,4 +1,4 @@
-import React, { memo } from 'react'
+import React from 'react'
 import S from './input.scss'
 
 type Props = React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>

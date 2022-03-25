@@ -1,10 +1,10 @@
-import { Spinner } from '@/presentation/components/spinner/spinner';
-import LoginHeader from '@/presentation/components/login-header/login-header';
-import Footer from '@/presentation/components/footer/footer';
 import React from 'react';
+import { LoginHeader } from '@/presentation/components';
+import { Input } from '@/presentation/components';
+import { Footer } from '@/presentation/components';
+import { FormStatus } from '@/presentation/components';
+
 import S from './login-styles.scss';
-import Input from '@/presentation/components/input/input';
-import FormStatus from '@/presentation/components/form-status/form-status';
 
 const Login = () => {
     return (

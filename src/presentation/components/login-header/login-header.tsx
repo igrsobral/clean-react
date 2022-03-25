@@ -1,5 +1,5 @@
 import React, { memo } from 'react'
-import { Logo } from '../logo/logo'
+import { Logo } from '@/presentation/components'
 import S from './login-header-styles.scss'
 
 function LoginHeader() {

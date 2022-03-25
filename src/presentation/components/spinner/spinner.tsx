@@ -3,7 +3,7 @@ import S from './spinner-styles.scss'
 
 type Props = React.HTMLAttributes<HTMLElement>
 
-export function Spinner(props: Props) {
+function Spinner(props: Props) {
     return (
         <div {...props} className={S.spinner}>
             <div>
@@ -13,3 +13,5 @@ export function Spinner(props: Props) {
         </div>
     )
 }
+
+export default Spinner

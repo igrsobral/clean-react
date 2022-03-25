@@ -1,5 +1,5 @@
 import React from 'react'
-import { Spinner } from '../spinner/spinner';
+import { Spinner } from '../';
 import S from './form-status.scss'
 
 function FormStatus() {
