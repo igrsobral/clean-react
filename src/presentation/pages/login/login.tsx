@@ -1,6 +1,6 @@
-import LoginHeader from '@/presentation/components/login-header/login-header';
-import { Logo } from '@/presentation/components/logo/logo';
 import { Spinner } from '@/presentation/components/spinner/spinner';
+import LoginHeader from '@/presentation/components/login-header/login-header';
+import Footer from '@/presentation/components/footer/footer';
 import React from 'react';
 import S from './login-styles.scss';
 
@@ -20,9 +20,7 @@ const Login = () => {
                 <a href="">criar conta</a>
                 <Spinner />
             </form>
-            <footer className={S.footer}>
-
-            </footer>
+            <Footer />
         </div>
     )
 }
