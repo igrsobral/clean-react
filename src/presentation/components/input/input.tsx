@@ -7,7 +7,7 @@ function Input(props: Props) {
     return (
         <div className={S.inputWrap}>
             <input {...props} />
-            <span className={S.status}>x</span>
+            {/* <span className={S.status}>x</span> */}
         </div>
     );
 }

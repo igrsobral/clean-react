@@ -4,6 +4,7 @@ import Footer from '@/presentation/components/footer/footer';
 import React from 'react';
 import S from './login-styles.scss';
 import Input from '@/presentation/components/input/input';
+import FormStatus from '@/presentation/components/form-status/form-status';
 
 const Login = () => {
     return (
@@ -15,7 +16,7 @@ const Login = () => {
                 <Input type="password" name="password" placeholder="Digite sua senha" />
                 <button type="submit">Entrar</button>
                 <span>criar conta</span>
-                <Spinner />
+                <FormStatus />
             </form>
             <Footer />
         </div>

@@ -1,0 +1,10 @@
+@import "../../styles/colors.scss";
+
+.errorWrap {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    // danger color
+    color: #880E4F;
+}
