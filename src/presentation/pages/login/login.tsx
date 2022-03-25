@@ -1,8 +1,5 @@
 import React from 'react';
-import { LoginHeader } from '@/presentation/components';
-import { Input } from '@/presentation/components';
-import { Footer } from '@/presentation/components';
-import { FormStatus } from '@/presentation/components';
+import { Footer, LoginHeader, Input, FormStatus } from '@/presentation/components';
 
 import S from './login-styles.scss';
 
