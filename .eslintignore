@@ -3,4 +3,5 @@ node_modules
 coverage
 public/js
 dist
+dist/
 *.scss
