@@ -19,7 +19,7 @@ function Input(props: Props) {
     }
     return (
         <div className={S.inputWrap}>
-            <input {...props} onFocus={enabledInput} readOnly />
+            <input {...props} onFocus={enabledInput} autoComplete={"off"} readOnly />
             <span data-testid={`${props.name}-status`} title={getTitle()} className={S.status}>{getStatus()}</span>
         </div>
     );
