@@ -12,14 +12,12 @@ function Input(props: Props) {
     }
     const getStatus = (): string => {
         return '🔴'
-        // return '✅'
     }
     const getTitle = (): string => {
         return error
     }
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
         const { name, value } = e.target;
-        const { setState } = useContext(Context);
         setState({
             ...state,
             [name]: value
