@@ -4,12 +4,14 @@ import Context from '@/presentation/contexts/form/form-context';
 
 import S from './login-styles.scss';
 import { Validation } from '@/presentation/protocols/validation';
+import { Authentication } from '@/domain/useCases';
 
 type Props = {
     validation: Validation;
+    authentication: Authentication;
 }
 
-const Login = ({ validation }: Props) => {
+const Login = ({ validation , authentication }: Props) => {
     const [state, setState] = useState({
         isLoading: false,
         email: '',
@@ -27,11 +29,15 @@ const Login = ({ validation }: Props) => {
         });
     }, [state.email, state.password]);
 
-    const handleSubmit = (e: FormEvent<HTMLFormElement>): void => {
+    const handleSubmit = async (e: FormEvent<HTMLFormElement>): Promise<void> => {
         e.preventDefault();
         setState({
             ...state,
             isLoading: true,
+        });
+        await authentication.auth({ 
+            email: state.email ,
+            password: state.password
         });
     }
 
