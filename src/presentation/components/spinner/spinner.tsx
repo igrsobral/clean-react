@@ -5,7 +5,7 @@ type Props = React.HTMLAttributes<HTMLElement>
 
 function Spinner(props: Props) {
     return (
-        <div {...props} className={S.spinner}>
+        <div {...props} className={S.spinner} data-testid="spinner" >
             <div>
             </div>
             <div>
