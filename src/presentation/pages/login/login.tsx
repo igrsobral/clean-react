@@ -11,7 +11,7 @@ type Props = {
     authentication: Authentication;
 }
 
-const Login = ({ validation , authentication }: Props) => {
+const Login = ({ validation, authentication }: Props) => {
     const [state, setState] = useState({
         isLoading: false,
         email: '',
@@ -21,7 +21,7 @@ const Login = ({ validation , authentication }: Props) => {
         main: ''
     });
 
-    useEffect(() => {   
+    useEffect(() => {
         setState({
             ...state,
             emailError: validation.validate('email', state.email),
@@ -31,14 +31,17 @@ const Login = ({ validation , authentication }: Props) => {
 
     const handleSubmit = async (e: FormEvent<HTMLFormElement>): Promise<void> => {
         e.preventDefault();
+        if (state.isLoading) return;
         setState({
             ...state,
             isLoading: true,
         });
-        await authentication.auth({ 
-            email: state.email ,
+
+        await authentication.auth({
+            email: state.email,
             password: state.password
         });
+
     }
 
     return (
