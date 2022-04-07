@@ -9,7 +9,7 @@ function FormStatus() {
     return (
         <div data-testid="error-wrap" className={S.errorWrap}>
             {isLoading && <Spinner />}
-            {main && <span className={S.error}>{main}</span>}
+            {main && <span data-testid="main-error" className={S.error}>{main}</span>}
         </div>
     );
 }
