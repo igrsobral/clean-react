@@ -32,6 +32,10 @@ module.exports = merge(common, {
     static: {
       directory: './public'
     },
+    allowedHosts: [
+      '.gitpod.io'
+    ],
+    // disableHostCheck: true, 
     historyApiFallback: true,
     port: 8080
   },
