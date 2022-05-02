@@ -3,7 +3,7 @@ import { Router } from 'react-router-dom';
 import { createMemoryHistory } from 'history';
 import { cleanup, fireEvent, render, RenderResult, waitFor } from '@testing-library/react';
 import 'jest-localstorage-mock';
-import Login from './login';
+import { Login } from '@/presentation/pages';
 import { ValidationStub, AuthenticationSpy } from '@/presentation/tests';
 import faker from 'faker';
 import { InvalidCredentialsError } from '@/domain/errors';
