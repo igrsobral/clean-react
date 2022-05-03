@@ -11,7 +11,8 @@
     "clear_jest": "jest --clearCache",
     "test:watch": "yarn test -- --watch",
     "test:staged": "yarn test -- --findRelatedTests",
-    "test:ci": "yarn test -- ---coverage"
+    "test:ci": "yarn test -- ---coverage",
+    "check": "npm-check -u -s"
   },
   "keywords": [],
   "author": "",
