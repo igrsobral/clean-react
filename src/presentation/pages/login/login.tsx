@@ -5,14 +5,15 @@ import Context from '@/presentation/contexts/form/form-context';
 
 import S from './login-styles.scss';
 import { Validation } from '@/presentation/protocols/validation';
-import { Authentication } from '@/domain/useCases';
+import { Authentication, SaveAccessToken } from '@/domain/useCases';
 
 type Props = {
     validation: Validation;
     authentication: Authentication;
+    saveAccessToken: SaveAccessToken;
 }
 
-const Login = ({ validation, authentication }: Props) => {
+const Login = ({ validation, authentication, saveAccessToken }: Props) => {
     const history = useHistory();
     const [state, setState] = useState({
         isLoading: false,
@@ -44,7 +45,7 @@ const Login = ({ validation, authentication }: Props) => {
                 email: state.email,
                 password: state.password
             });
-            localStorage.setItem('accessToken', account.accessToken);
+            await saveAccessToken.save(account?.accessToken);
             history.replace('/');
         } catch (error) {
             setState({
@@ -64,7 +65,7 @@ const Login = ({ validation, authentication }: Props) => {
                     <Input type="email" name="email" placeholder="Digite seu e-mail" />
                     <Input type="password" name="password" placeholder="Digite sua senha" />
                     <button disabled={!!state.emailError || !!state.passwordError} data-testid="submit" type="submit">Entrar</button>
-                    <Link  data-testid="signup" to="/signup" className={S.link}>criar conta</Link>
+                    <Link data-testid="signup" to="/signup" className={S.link}>criar conta</Link>
                     <FormStatus />
                 </form>
             </Context.Provider>
