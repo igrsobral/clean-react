@@ -4,32 +4,39 @@ import { createMemoryHistory } from 'history';
 import { cleanup, fireEvent, render, RenderResult, waitFor } from '@testing-library/react';
 import 'jest-localstorage-mock';
 import { Login } from '@/presentation/pages';
-import { ValidationStub, AuthenticationSpy } from '@/presentation/tests';
+import { ValidationStub, AuthenticationSpy, SaveAccessTokenMock } from '@/presentation/tests';
 import faker from 'faker';
 import { InvalidCredentialsError } from '@/domain/errors';
 
 type SutTypes = {
     sut: RenderResult;
     authenticationSpy: AuthenticationSpy;
+    saveAccessTokenMock: SaveAccessTokenMock;
 }
 
 type SutParams = {
     validationError: string;
 }
 
-const history = createMemoryHistory({ initialEntries: ['/login']});
+const history = createMemoryHistory({ initialEntries: ['/login'] });
 const makeSut = (params?: SutParams): SutTypes => {
     const validationStub = new ValidationStub();
     const authenticationSpy = new AuthenticationSpy();
+    const saveAccessTokenMock = new SaveAccessTokenMock();
     validationStub.errorMessage = params?.validationError;
     const sut = render(
         <Router history={history} >
-            <Login validation={validationStub} authentication={authenticationSpy} />
+            <Login
+                validation={validationStub}
+                authentication={authenticationSpy}
+                saveAccessToken={saveAccessTokenMock}
+            />
         </Router>
     );
     return {
         sut,
-        authenticationSpy
+        authenticationSpy,
+        saveAccessTokenMock
     }
 }
 
@@ -57,22 +64,22 @@ const testStatusForField = (sut: RenderResult, fieldName: string, validationErro
     expect(emailStatus.textContent).toBe(validationError ? '🔴' : '✅');
 }
 
-const testErrorWrapChildCount = (sut: RenderResult, count: number) : void => {
+const testErrorWrapChildCount = (sut: RenderResult, count: number): void => {
     const errorWrap = sut.getByTestId(`error-wrap`);
     expect(errorWrap.childElementCount).toBe(count)
 }
 
-const testElementsExists = (sut: RenderResult, fieldName: string) : void => {
+const testElementsExists = (sut: RenderResult, fieldName: string): void => {
     const el = sut.getByTestId(fieldName);
     expect(el).toBeTruthy();
 }
 
-const testElementText = (sut: RenderResult, fieldName: string, text: string) : void => {
+const testElementText = (sut: RenderResult, fieldName: string, text: string): void => {
     const el = sut.getByTestId(fieldName);
     expect(el.textContent).toBe(text)
 }
 
-const testButtonIsDisabled = (sut: RenderResult, fieldName: string, isDisabled: boolean) : void => {
+const testButtonIsDisabled = (sut: RenderResult, fieldName: string, isDisabled: boolean): void => {
     const submitButton = sut.getByTestId(fieldName) as HTMLButtonElement;
     expect(submitButton.disabled).toBe(isDisabled);
 }
@@ -169,9 +176,9 @@ describe('Login component', () => {
     });
 
     test('Should add accessToken to localstorage on success', async () => {
-        const { sut, authenticationSpy } = makeSut();
+        const { sut, authenticationSpy, saveAccessTokenMock } = makeSut();
         await simulateValidSubmit(sut);
-        expect(localStorage.setItem).toHaveBeenCalledWith('accessToken', authenticationSpy.account.accessToken);
+        expect(saveAccessTokenMock.accessToken).toBe(authenticationSpy.account.accessToken);
         expect(history.length).toBe(1);
         expect(history.location.pathname).toBe('/')
     })
