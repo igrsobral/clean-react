@@ -185,7 +185,6 @@ describe('Login component', () => {
 
     test('Should add accessToken if SaveAccessToken fails', async () => {
         const { sut, saveAccessTokenMock } = makeSut();
-        await simulateValidSubmit(sut);
         const error = new InvalidCredentialsError();
         jest.spyOn(saveAccessTokenMock, 'save').mockReturnValueOnce(Promise.reject(error));
         await simulateValidSubmit(sut);
