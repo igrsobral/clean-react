@@ -21,9 +21,9 @@ type SutParams = {
 const history = createMemoryHistory({ initialEntries: ['/login'] });
 const makeSut = (params?: SutParams): SutTypes => {
     const validationStub = new ValidationStub();
+    validationStub.errorMessage = params?.validationError;
     const authenticationSpy = new AuthenticationSpy();
     const saveAccessTokenMock = new SaveAccessTokenMock();
-    validationStub.errorMessage = params?.validationError;
     const sut = render(
         <Router history={history} >
             <Login
@@ -71,9 +71,9 @@ const testElementText = (sut: RenderResult, fieldName: string, text: string): vo
 describe('Login component', () => {
     afterEach(cleanup);
 
-    beforeEach(() => {
-        localStorage.clear();
-    });
+    // beforeEach(() => {
+    //     localStorage.clear();
+    // });
 
     test('Should start with initial state', () => {
         const validationError = faker.random.words();
