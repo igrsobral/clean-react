@@ -42,7 +42,7 @@ const SignUp = ({ validation }: Props) => {
                     <Input type="text" name="email" placeholder="Digite seu e-mail" />
                     <Input type="password" name="password" placeholder="Digite sua senha" />
                     <Input type="passwordConfirmation" name="passwordConfirmation" placeholder="Repita sua senha" />
-                    <button data-testid="submit" type="submit" disabled className={S.submit}>Cadastrar</button>
+                    <button disabled={!!state.nameError || !!state.emailError || !!state.passwordError || !!state.passwordConfirmationError} data-testid="submit" type="submit" className={S.submit}>Cadastrar</button>
                     <span className={S.link}>voltar para login</span>
                     <FormStatus />
                 </form>
