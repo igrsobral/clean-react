@@ -3,12 +3,14 @@ import S from './signup-styles.scss';
 import { Footer, LoginHeader, Input, FormStatus } from '@/presentation/components';
 import Context from '@/presentation/contexts/form/form-context';
 import { Validation } from '@/presentation/protocols/validation';
+import { AddAccount } from '@/domain/useCases';
 
 type Props = {
     validation: Validation;
+    addAccount: AddAccount
 }
 
-const SignUp = ({ validation }: Props) => {
+const SignUp = ({ validation, addAccount }: Props) => {
     const [state, setState] = useState({
         isLoading: false,
         name: '',
@@ -38,6 +40,13 @@ const SignUp = ({ validation }: Props) => {
         setState({
             ...state,
             isLoading: true,
+        });
+
+        await addAccount.add({
+            name: state.name,
+            email: state.email,
+            password: state.password,
+            passwordConfirmation: state.passwordConfirmation,
         });
     }
 
