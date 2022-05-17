@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { FormEvent, useEffect, useState } from 'react';
 import S from './signup-styles.scss';
 import { Footer, LoginHeader, Input, FormStatus } from '@/presentation/components';
 import Context from '@/presentation/contexts/form/form-context';
@@ -32,11 +32,20 @@ const SignUp = ({ validation }: Props) => {
         })
     }, [state.name, state.email, state.password, state.passwordConfirmation])
 
+    const handleSubmit = async (e: FormEvent<HTMLFormElement>): Promise<void> => {
+        e.preventDefault();
+        if (state.isLoading || state.emailError || state.passwordError) return;
+        setState({
+            ...state,
+            isLoading: true,
+        });
+    }
+
     return (
         <div className={S.signup}>
             <LoginHeader />
             <Context.Provider value={{ state, setState }}>
-                <form data-testid="form" className={S.form}>
+                <form data-testid="form" className={S.form} onSubmit={handleSubmit}>
                     <h1>Criar Conta</h1>
                     <Input type="text" name="name" placeholder="Digite seu nome" />
                     <Input type="text" name="email" placeholder="Digite seu e-mail" />
