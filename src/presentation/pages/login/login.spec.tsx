@@ -143,7 +143,7 @@ describe('Login component', () => {
         Helper.testChildCount(sut, 'error-wrap', 1);
     });
 
-    test('Should add accessToken to localstorage on success', async () => {
+    test('Should call SaveAccessToken on success', async () => {
         const { sut, authenticationSpy, saveAccessTokenMock } = makeSut();
         await simulateValidSubmit(sut);
         expect(saveAccessTokenMock.accessToken).toBe(authenticationSpy.account.accessToken);
