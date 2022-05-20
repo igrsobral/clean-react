@@ -36,12 +36,11 @@ const SignUp = ({ validation, addAccount }: Props) => {
 
     const handleSubmit = async (e: FormEvent<HTMLFormElement>): Promise<void> => {
         e.preventDefault();
-        if (state.isLoading || state.emailError || state.passwordError) return;
-        setState({
-            ...state,
-            isLoading: true,
-        });
+        if (state.isLoading) {
+            return;
+        }
 
+        setState({ ...state, isLoading: true });
         await addAccount.add({
             name: state.name,
             email: state.email,
