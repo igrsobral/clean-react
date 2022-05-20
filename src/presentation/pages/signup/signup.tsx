@@ -4,6 +4,7 @@ import { Footer, LoginHeader, Input, FormStatus } from '@/presentation/component
 import Context from '@/presentation/contexts/form/form-context';
 import { Validation } from '@/presentation/protocols/validation';
 import { AddAccount } from '@/domain/useCases';
+import { stat } from 'fs';
 
 type Props = {
     validation: Validation;
@@ -36,7 +37,7 @@ const SignUp = ({ validation, addAccount }: Props) => {
 
     const handleSubmit = async (e: FormEvent<HTMLFormElement>): Promise<void> => {
         e.preventDefault();
-        if (state.isLoading) {
+        if (state.isLoading || state.emailError || state.nameError || state.passwordError || state.passwordConfirmationError) {
             return;
         }
 
