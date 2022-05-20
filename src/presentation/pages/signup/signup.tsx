@@ -49,6 +49,7 @@ const SignUp = ({ validation, addAccount }: Props) => {
                 password: state.password,
                 passwordConfirmation: state.passwordConfirmation,
             });
+
         } catch (error) {
             setState({
                 ...state,
