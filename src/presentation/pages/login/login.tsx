@@ -65,7 +65,7 @@ const Login = ({ validation, authentication, saveAccessToken }: Props) => {
                     <Input type="email" name="email" placeholder="Digite seu e-mail" />
                     <Input type="password" name="password" placeholder="Digite sua senha" />
                     <button disabled={!!state.emailError || !!state.passwordError} data-testid="submit" type="submit">Entrar</button>
-                    <Link data-testid="signup" to="/signup" className={S.link}>criar conta</Link>
+                    <Link data-testid="login-link" replace to="/login" className={S.link}>criar conta</Link>
                     <FormStatus />
                 </form>
             </Context.Provider>

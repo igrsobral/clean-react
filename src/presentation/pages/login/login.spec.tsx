@@ -160,11 +160,11 @@ describe('Login component', () => {
         Helper.testChildCount(sut, 'error-wrap', 1)
     })
 
-    test('Should go to signup page', async () => {
+    test('Should go to login page', async () => {
         const { sut } = makeSut();
-        const register = sut.getByTestId('signup');
-        fireEvent.click(register);
-        expect(history.length).toBe(2);
-        expect(history.location.pathname).toBe('/signup')
+        const loginLink = sut.getByTestId('login-link');
+        fireEvent.click(loginLink);
+        expect(history.length).toBe(1);
+        expect(history.location.pathname).toBe('/login')
     })
 });
