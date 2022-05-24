@@ -1,7 +1,7 @@
 import React, { FormEvent, useEffect, useState } from 'react';
 import S from './signup-styles.scss';
 import { Footer, LoginHeader, Input, FormStatus } from '@/presentation/components';
-import { useHistory } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import Context from '@/presentation/contexts/form/form-context';
 import { Validation } from '@/presentation/protocols/validation';
 import { AddAccount, SaveAccessToken } from '@/domain/useCases';
@@ -73,7 +73,7 @@ const SignUp = ({ validation, addAccount, saveAccessToken }: Props) => {
                     <Input type="password" name="password" placeholder="Digite sua senha" />
                     <Input type="passwordConfirmation" name="passwordConfirmation" placeholder="Repita sua senha" />
                     <button disabled={!!state.nameError || !!state.emailError || !!state.passwordError || !!state.passwordConfirmationError} data-testid="submit" type="submit" className={S.submit}>Cadastrar</button>
-                    <span className={S.link}>voltar para login</span>
+                    <Link data-testid="signup-link" to="/signup" className={S.link}>voltar para login</Link>
                     <FormStatus />
                 </form>
             </Context.Provider>
