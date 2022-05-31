@@ -81,7 +81,7 @@ const SignUp = ({ validation, addAccount, saveAccessToken }: Props) => {
                     <Input type="text" name="name" placeholder="Digite seu nome" />
                     <Input type="text" name="email" placeholder="Digite seu e-mail" />
                     <Input type="password" name="password" placeholder="Digite sua senha" />
-                    <Input type="passwordConfirmation" name="passwordConfirmation" placeholder="Repita sua senha" />
+                    <Input type="password" name="passwordConfirmation" placeholder="Repita sua senha" />
                     <SubmitButton text="Cadatrar" />
                     <Link data-testid="signup-link" to="/signup" className={S.link}>voltar para login</Link>
                     <FormStatus />
