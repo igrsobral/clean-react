@@ -1,5 +1,4 @@
 import React, { useContext } from 'react'
-import S from './form-status.scss'
 import Context from '@/presentation/contexts/form/form-context'
 
 type Props = {
@@ -13,7 +12,7 @@ function SubmitButton({ text }: Props) {
             disabled={state.isFormInvalid}
             data-testid="submit"
             type="submit"
-            className={S.submit}>
+        >
             {text}
         </button>
     )
