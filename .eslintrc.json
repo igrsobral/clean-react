@@ -4,12 +4,19 @@
       "version": "16.8.6"
     }
   },
-  "extends" : [
+  "extends": [
     "standard-with-typescript",
-    "plugin:react/recommended"
- ],
- "plugins" : ["react"],
-  "parsedOptions":{
+    "plugin:react/recommended",
+    "plugin:cypress/recommended"
+  ],
+  "env": {
+    "cypress/globals": true
+  },
+  "plugins": [
+    "react",
+    "cypress"
+  ],
+  "parsedOptions": {
     "project": "./.tsconfig.json"
   },
   "rules": {
@@ -19,7 +26,7 @@
     "@typescript-eslint/naming-convention": "warn",
     "@typescript-eslint/no-unused-vars": "off",
     "@typescript-eslint/return-await": "off",
-    "react/jsx-uses-react": "error",  
+    "react/jsx-uses-react": "error",
     "react/jsx-uses-vars": "error"
     // "isolatedModules": false
   }

@@ -28,9 +28,12 @@
   },
   "include": [
     "src",
-    "tests"
+    "tests",
+    "cypress/integration"
   ],
   "exclude": [
-    "tests/e2e/cypress"
+    "tests/e2e/cypress",
+    "src/main/test/cypress",
+    "**/*.spec.ts",
   ]
 }

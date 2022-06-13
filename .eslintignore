@@ -5,3 +5,4 @@ public/js
 dist
 dist/
 *.scss
+*.json
