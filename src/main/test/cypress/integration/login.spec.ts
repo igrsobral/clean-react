@@ -1,6 +1,9 @@
 describe('Login', () => {
+    beforeEach(() => {
+        cy.visit('login')
+    })
+
     it('should load with correct initial state', () => {
-        cy.visit('/login');
-        cy.get('h1').should('contain', 'Login');
+        cy.get('[data-testid="email-status"]').should('have.attr', 'title', 'Campo obrigatório');
     });
 })
