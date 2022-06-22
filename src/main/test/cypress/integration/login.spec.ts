@@ -58,5 +58,17 @@ describe('Login', () => {
         cy.url().should('eq', `${baseUrl}/login`)
     });
 
+    it('should save accessToken if valid credentials are provided', () => {
+        cy.get('[data-testid="email"]').focus().type('mango@gmail.com');
+        cy.get('[data-testid="password"]').focus().type('12345');
+        cy.get('[data-testid="submit"]').click();
+        cy.get('[data-testid="error-wrap"]')
+            .get('[data-testid="spinner"]').should('exist')
+            .get('[data-testid="main-error"]').should('not.exist')
+            .get('[data-testid="spinner"]').should('not.exist')
+        cy.url().should('eq', `${baseUrl}/`)
+        cy.window().then(window => assert.isOk(window.localStorage.getItem('accessToken')))
+    });
+
 
 })
