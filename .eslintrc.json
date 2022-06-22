@@ -27,7 +27,9 @@
     "@typescript-eslint/no-unused-vars": "off",
     "@typescript-eslint/return-await": "off",
     "react/jsx-uses-react": "error",
-    "react/jsx-uses-vars": "error"
+    "import/export": "off",
+    "react/jsx-uses-vars": "error",
+    "no-redeclare": "off"
     // "isolatedModules": false
   }
 }
