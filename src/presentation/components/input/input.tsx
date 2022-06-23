@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useRef } from 'react'
 import S from './input.scss'
 import Context from '@/presentation/contexts/form/form-context';
 
@@ -6,34 +6,30 @@ type Props = React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>
 
 function Input(props: Props) {
     const { state, setState } = useContext(Context);
+    const inputRef = useRef<HTMLInputElement>()
     const error = state[`${props.name}Error`];
-    const enabledInput = (e: React.FocusEvent<HTMLInputElement>): void => {
-        e.target.readOnly = false;
-    }
-    const getStatus = (): string => {
-        return error ? '🔴' : '✅';
-    }
-    const getTitle = (): string => {
-        return error || 'Tudo certo';
-    }
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
-        const { name, value } = e.target;
-        setState({
-            ...state,
-            [name]: value
-        });
-    }
     return (
         <div className={S.inputWrap}>
-            <input 
+            <input
                 {...props}
-                onChange={handleChange} 
-                data-testid={props.name} 
-                onFocus={enabledInput} 
-                autoComplete={"off"} 
+                ref={inputRef}
+                placeholder=" "
+                onChange={(e) => setState({ ...state, [e.target.name]: e.target.value })}
+                data-testid={props.name}
+                onFocus={(e) => e.target.readOnly = false}
+                autoComplete={"off"}
                 readOnly
-             />
-            <span data-testid={`${props.name}-status`} title={getTitle()} className={S.status}>{getStatus()}</span>
+            />
+            <label onClick={() => inputRef.current.focus()}>
+                {props.placeholder}
+            </label>
+            <span
+                data-testid={`${props.name}-status`}
+                title={error || 'Tudo certo'}
+                className={S.status}
+            >
+                {error ? '🔴' : '✅'}
+            </span>
         </div>
     );
 }
