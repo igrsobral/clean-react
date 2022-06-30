@@ -47,9 +47,9 @@ describe('Login', () => {
     });
 
     it('should present InvalidCredentialsError on 401', () => {
-        cy.intercept('POST', '/login', {
+        cy.intercept('POST', '/login/', {
             statusCode: 401,
-            body: {
+            response: {
                 error: faker.random.words()
             }
         }).as('request')
@@ -62,24 +62,23 @@ describe('Login', () => {
     });
 
     it('should  present UnexpectedError if invalid data is returned', () => {
-        cy.intercept('POST', '/login', {
+        cy.intercept('POST', '/login/', {
             statusCode: 200,
-            body: {
+            response: {
                 invalidProperty: faker.random.uuid()
             }
         }).as('request')
         cy.get('[data-testid="email"]').focus().type(faker.internet.email());
-        cy.get('[data-testid="password"]').focus().type(faker.random.alphaNumeric(5));
-        cy.get('[data-testid="submit"]').click();
+        cy.get('[data-testid="password"]').focus().type(faker.random.alphaNumeric(5)).type('{enter}');
         cy.get('[data-testid="spinner"]').should('not.exist')
         cy.get('[data-testid="main-error"]').should('contain.text', 'Credenciais inválidas')
         cy.url().should('eq', `${baseUrl}/login`)
     });
 
     it('should save accessToken if valid credentials are provided', () => {
-        cy.intercept('POST', '/login', {
+        cy.intercept('POST', '/login/', {
             statusCode: 200,
-            body: {
+            response: {
                 accessToken: faker.random.uuid()
             }
         }).as('request')
@@ -92,9 +91,9 @@ describe('Login', () => {
     });
 
     it('should prevent multiple submits', () => {
-        cy.intercept('POST', '/login', {
+        cy.intercept('POST', '/login/', {
             statusCode: 200,
-            body: {
+            response: {
                 accessToken: faker.random.uuid()
             }
         }).as('request')
@@ -105,9 +104,9 @@ describe('Login', () => {
     });
 
     it('should not call submit if form is invalid', () => {
-        cy.intercept('POST', '/login', {
+        cy.intercept('POST', '/login/', {
             statusCode: 200,
-            body: {
+            response: {
                 accessToken: faker.random.uuid()
             }
         }).as('request')
