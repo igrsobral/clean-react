@@ -9,27 +9,29 @@ function Input(props: Props) {
     const inputRef = useRef<HTMLInputElement>()
     const error = state[`${props.name}Error`];
     return (
-        <div className={S.inputWrap}>
+        <div
+            data-testid={`${props.name}-wrap`}
+            className={S.inputWrap}
+            data-status={error ? 'invalid' : 'valid'}
+        >
             <input
                 {...props}
                 ref={inputRef}
                 placeholder=" "
+                title={error}
                 onChange={(e) => setState({ ...state, [e.target.name]: e.target.value })}
                 data-testid={props.name}
                 onFocus={(e) => e.target.readOnly = false}
                 autoComplete={"off"}
                 readOnly
             />
-            <label onClick={() => inputRef.current.focus()}>
+            <label
+                data-testid={`${props.name}-label`}
+                onClick={() => inputRef.current.focus()}
+                title={error}
+            >
                 {props.placeholder}
             </label>
-            <span
-                data-testid={`${props.name}-status`}
-                title={error || 'Tudo certo'}
-                className={S.status}
-            >
-                {error ? '🔴' : '✅'}
-            </span>
         </div>
     );
 }
