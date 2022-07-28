@@ -6,7 +6,7 @@ describe('Login', () => {
         cy.visit('signup')
     })
 
-    it('should load with correct initial state', () => {
+    it('Should load with correct initial state', () => {
         cy.getByTestId('name').should('have.attr', 'readOnly');
         FormHelper.testInputsStatus('name', 'Campo obrigatório');
         cy.getByTestId('email').should('have.attr', 'readOnly');
@@ -19,7 +19,7 @@ describe('Login', () => {
         cy.getByTestId('error-wrap').should('not.have.descendants');
     });
 
-    it('should present error state if form is invalid', () => {
+    it('Should present error state if form is invalid', () => {
         cy.getByTestId('name').focus().type(faker.random.alphaNumeric(3));
         FormHelper.testInputsStatus('name', 'Valor inválido');
         cy.getByTestId('email').focus().type(faker.random.word());
@@ -29,6 +29,20 @@ describe('Login', () => {
         cy.getByTestId('passwordConfirmation').focus().type(faker.random.alphaNumeric(4));
         FormHelper.testInputsStatus('passwordConfirmation', 'Valor inválido');
         cy.getByTestId('submit').should('have.attr', 'disabled');
+        cy.getByTestId('error-wrap').should('not.have.descendants');
+    });
+
+    it('Should present valid state if form is valid', () => {
+        cy.getByTestId('name').focus().type(faker.name.findName());
+        FormHelper.testInputsStatus('name');
+        cy.getByTestId('email').focus().type(faker.internet.email());
+        FormHelper.testInputsStatus('email');
+        const password = faker.random.alphaNumeric(5);
+        cy.getByTestId('password').focus().type(password);
+        FormHelper.testInputsStatus('password');
+        cy.getByTestId('passwordConfirmation').focus().type(password);
+        FormHelper.testInputsStatus('passwordConfirmation');
+        cy.getByTestId('submit').should('not.have.attr', 'disabled');
         cy.getByTestId('error-wrap').should('not.have.descendants');
     });
 })

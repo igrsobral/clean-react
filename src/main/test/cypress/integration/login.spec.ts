@@ -13,7 +13,7 @@ describe('Login', () => {
         cy.visit('login')
     })
 
-    it('should load with correct initial state', () => {
+    it('Should load with correct initial state', () => {
         cy.getByTestId('email').should('have.attr', 'readOnly');
         FormHelper.testInputsStatus('email', 'Campo obrigatório');
         cy.getByTestId('password').should('have.attr', 'readOnly');
@@ -22,7 +22,7 @@ describe('Login', () => {
         cy.getByTestId('error-wrap').should('not.have.descendants');
     });
 
-    it('should present error state if form is invalid', () => {
+    it('Should present error state if form is invalid', () => {
         cy.getByTestId('email').focus().type(faker.random.word());
         FormHelper.testInputsStatus('email', 'Valor inválido');
         cy.getByTestId('password').focus().type(faker.random.alphaNumeric(3));
@@ -31,7 +31,7 @@ describe('Login', () => {
         cy.getByTestId('error-wrap').should('not.have.descendants');
     });
 
-    it('should present valid state if form is valid', () => {
+    it('Should present valid state if form is valid', () => {
         cy.getByTestId('email').focus().type(faker.internet.email());
         FormHelper.testInputsStatus('email');
         cy.getByTestId('password').focus().type(faker.random.alphaNumeric(5));
@@ -42,14 +42,14 @@ describe('Login', () => {
         cy.getByTestId('error-wrap').should('not.have.descendants');
     });
 
-    it('should present InvalidCredentialsError on 401', () => {
+    it('Should present InvalidCredentialsError on 401', () => {
         Http.mockInvalidCredentialsError();
         simulateValidSubmit();
         FormHelper.testMainError('Credenciais inválidas')
         FormHelper.testUrl('/login')
     });
 
-    it('should  present UnexpectedError on default error cases', () => {
+    it('Should  present UnexpectedError on default error cases', () => {
         Http.mockUnexpectedError();
         simulateValidSubmit();
         FormHelper.testMainError('Algo de errado aconteceu. Tente novamente em breve')
@@ -63,7 +63,7 @@ describe('Login', () => {
         FormHelper.testUrl('/login')
     });
 
-    it('should present save accessToken if valid credentials are provided', () => {
+    it('Should present save accessToken if valid credentials are provided', () => {
         Http.mockOk();
         simulateValidSubmit();
         cy.getByTestId('error-wrap').should('not.have.descendants');
@@ -71,7 +71,7 @@ describe('Login', () => {
         FormHelper.testLocalStorageItem('accessToken')
     });
 
-    it('should prevent multiple submits', () => {
+    it('Should prevent multiple submits', () => {
         Http.mockOk();
         cy.getByTestId('email').focus().type(faker.internet.email());
         cy.getByTestId('password').focus().type(faker.random.alphaNumeric(5));
@@ -79,7 +79,7 @@ describe('Login', () => {
         FormHelper.testHttpCallCount(1)
     });
 
-    it('should not call submit if form is invalid', () => {
+    it('Should not call submit if form is invalid', () => {
         Http.mockOk();
         cy.getByTestId('email').focus().type(faker.internet.email()).type('{enter}');
         FormHelper.testHttpCallCount(0)
