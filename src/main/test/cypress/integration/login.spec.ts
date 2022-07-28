@@ -1,6 +1,6 @@
-import faker from 'faker'
 import * as FormHelper from '../support/form-helper';
 import * as Http from '../support/login-mock'
+import faker from 'faker'
 
 const simulateValidSubmit = (): void => {
     cy.getByTestId('email').focus().type(faker.internet.email());
@@ -10,15 +10,15 @@ const simulateValidSubmit = (): void => {
 
 describe('Login', () => {
     beforeEach(() => {
-        cy.server();
         cy.visit('login')
     })
 
     it('should load with correct initial state', () => {
         cy.getByTestId('email').should('have.attr', 'readOnly');
-        cy.getByTestId('password').should('have.attr', 'readOnly');
-        cy.getByTestId('submit').should('have.attr', 'disabled');
         FormHelper.testInputsStatus('email', 'Campo obrigatório');
+        cy.getByTestId('password').should('have.attr', 'readOnly');
+        FormHelper.testInputsStatus('email', 'Campo obrigatório');
+        cy.getByTestId('submit').should('have.attr', 'disabled');
         cy.getByTestId('error-wrap').should('not.have.descendants');
     });
 
@@ -64,14 +64,9 @@ describe('Login', () => {
     });
 
     it('should present save accessToken if valid credentials are provided', () => {
-        cy.intercept('POST', '/login', {
-            statusCode: 200,
-        })
-        cy.getByTestId('email').focus().type('mango@gmail.com');
-        cy.getByTestId('password').focus().type('12345');
-        cy.getByTestId('submit').click();
-        cy.getByTestId('main-error').should('not.exist')
-        cy.getByTestId('spinner').should('not.exist')
+        Http.mockOk();
+        simulateValidSubmit();
+        cy.getByTestId('error-wrap').should('not.have.descendants');
         FormHelper.testUrl('/')
         FormHelper.testLocalStorageItem('accessToken')
     });
