@@ -77,5 +77,13 @@ describe('Login', () => {
         FormHelper.testUrl('/signup')
     });
 
+    it('Should present UnexpectedError if invalid data is returned', () => {
+        Http.mockOk();
+        simulateValidSubmit();
+        cy.getByTestId('error-wrap').should('not.have.descendants');
+        FormHelper.testUrl('/')
+        FormHelper.testLocalStorageItem('accessToken')
+    });
+
 })
 
