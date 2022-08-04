@@ -2,14 +2,20 @@ import * as FormHelper from '../support/form-helper';
 import * as Http from '../support/signup-mock'
 import faker from 'faker'
 
-const simulateValidSubmit = (): void => {
+
+const populateFields = (): void => {
     cy.getByTestId('name').focus().type(faker.name.findName());
     cy.getByTestId('email').focus().type(faker.internet.email());
     const password = faker.random.alphaNumeric(7);
     cy.getByTestId('password').focus().type(password)
     cy.getByTestId('passwordConfirmation').focus().type(password)
+}
+
+const simulateValidSubmit = (): void => {
+    populateFields()
     cy.getByTestId('submit').click()
 }
+
 
 describe('Login', () => {
     beforeEach(() => {
@@ -77,12 +83,19 @@ describe('Login', () => {
         FormHelper.testUrl('/signup')
     });
 
-    it('Should present UnexpectedError if invalid data is returned', () => {
+    it('Should present save accessToken if valid data crendentials are provided', () => {
         Http.mockOk();
         simulateValidSubmit();
         cy.getByTestId('error-wrap').should('not.have.descendants');
         FormHelper.testUrl('/')
         FormHelper.testLocalStorageItem('accessToken')
+    });
+
+    it('Should prevent multiples submits', () => {
+        Http.mockOk();
+        populateFields();
+        cy.getByTestId('submit').dblclick()
+        FormHelper.testHttpCallCount(1)
     });
 
 })
