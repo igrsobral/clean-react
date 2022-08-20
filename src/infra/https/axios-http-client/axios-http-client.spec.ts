@@ -25,29 +25,58 @@ const mockPostRequest = (): HttpPostParams => ({
 })
 
 describe('AxiosHttpClient', () => {
-    test('Should call axios with correct values', async () => {
-        const request = mockPostRequest();
-        const sut = makeSut()
-        await sut.post(request)
-        expect(mockedAxios.post).toHaveBeenCalledWith(request.url, request.body)
-    });
+    describe('post', () => {
+        test('Should call axios.post with correct values', async () => {
+            const request = mockPostRequest();
+            const sut = makeSut()
+            await sut.post(request)
+            expect(mockedAxios.post).toHaveBeenCalledWith(request.url, request.body)
+        });
 
-    test('Should return the correct statusCode and body', async () => {
-        const sut = makeSut();
-        const httpResponse = await sut.post(mockPostRequest())
-        expect(httpResponse).toEqual({
-            statusCode: mockedAxiosResult.status,
-            body: mockedAxiosResult.data
+        test('Should return correct response on axios.post', async () => {
+            const sut = makeSut();
+            const httpResponse = await sut.post(mockPostRequest())
+            expect(httpResponse).toEqual({
+                statusCode: mockedAxiosResult.status,
+                body: mockedAxiosResult.data
+            });
+        });
+
+        test('Should return  correct error on axios.post', async () => {
+            const sut = makeSut();
+            mockedAxios.post.mockRejectedValueOnce({
+                response: mockHttpResponse()
+            })
+            const promise = sut.post(mockPostRequest());
+            expect(promise).toEqual(mockedAxios.post.mock.results?.[0]?.value)
         });
     });
 
-    test('Should return the correct statusCode and body on failure', async () => {
-        const sut = makeSut();
-        mockedAxios.post.mockRejectedValueOnce({
-            response: mockHttpResponse()
-        })
-        const promise = sut.post(mockPostRequest());
-        expect(promise).toEqual(mockedAxios.post.mock.results?.[0]?.value)
+    describe('get', () => {
+        test('Should call axios.post with correct values', async () => {
+            const request = mockPostRequest();
+            const sut = makeSut()
+            await sut.post(request)
+            expect(mockedAxios.post).toHaveBeenCalledWith(request.url, request.body)
+        });
+
+        test('Should return correct response on axios.post', async () => {
+            const sut = makeSut();
+            const httpResponse = await sut.post(mockPostRequest())
+            expect(httpResponse).toEqual({
+                statusCode: mockedAxiosResult.status,
+                body: mockedAxiosResult.data
+            });
+        });
+
+        test('Should return  correct error on axios.post', async () => {
+            const sut = makeSut();
+            mockedAxios.post.mockRejectedValueOnce({
+                response: mockHttpResponse()
+            })
+            const promise = sut.post(mockPostRequest());
+            expect(promise).toEqual(mockedAxios.post.mock.results?.[0]?.value)
+        });
     });
 });
 
