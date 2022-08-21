@@ -9,6 +9,7 @@ export class AxiosHttpClient implements HttpPostClient, HttpGetClient {
         } catch (error) {
             axiosResponse = error.response
         }
+
         return {
             statusCode: axiosResponse.status,
             body: axiosResponse.data
@@ -16,7 +17,14 @@ export class AxiosHttpClient implements HttpPostClient, HttpGetClient {
     }
 
     async get(params: HttpGetParams): Promise<HttpResponse> {
-        const axiosResponse = await axios.get(params.url);
+        let axiosResponse: AxiosResponse
+        try {
+            axiosResponse = await axios.get(params.url);
+
+        } catch (error) {
+            axiosResponse = error.response
+        }
+
         return {
             statusCode: axiosResponse.status,
             body: axiosResponse.data
