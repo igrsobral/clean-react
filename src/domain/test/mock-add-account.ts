@@ -10,4 +10,4 @@ export const mockAddAccountParams = (): AddAccountParams => {
         password: password,
         passwordConfirmation: password
     }
-  }
+}
