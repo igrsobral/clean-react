@@ -11,10 +11,6 @@ export default function SurveyList() {
                 <h2>Enquetes</h2>
                 <ul>
                     <SurveyItem />
-                    <SurveyItem />
-
-                    <SurveyItem />
-                    <SurveyItem />
                 </ul>
             </div>
             <Footer />
