@@ -12,47 +12,39 @@ type SutTypes = {
     mockedAxios: jest.Mocked<typeof axios>
 }
 
-mockedAxios.post.mockResolvedValue(mockedAxiosResult)
-
-const makeSut = (): AxiosHttpClient => {
-    return new AxiosHttpClient();
+const makeSut = (): SutTypes => {
+    const sut = new AxiosHttpClient();
+    const mockedAxios = mockAxios()
+    return {
+        sut,
+        mockedAxios
+    }
 }
 
-const mockPostRequest = (): HttpPostParams => ({
-    url: faker.internet.url(),
-    body: faker.random.objectElement(),
-})
-
 describe('AxiosHttpClient', () => {
-    test('Should call axios with correct values', async () => {
-        const request = mockPostRequest();
-        const sut = makeSut()
-        await sut.post(request)
-        expect(mockedAxios.post).toHaveBeenCalledWith(request.url, request.body)
-    });
+    describe('post', () => {
+        test('Should call axios.post with correct values', async () => {
+            const request = mockPostRequest();
+            const { sut, mockedAxios } = makeSut()
+            await sut.post(request)
+            expect(mockedAxios.post).toHaveBeenCalledWith(request.url, request.body)
+        });
 
-    test('Should return the correct statusCode and body', async () => {
-        const sut = makeSut();
-        const httpResponse = await sut.post(mockPostRequest())
-        expect(httpResponse).toEqual({
-            statusCode: mockedAxiosResult.status,
-            body: mockedAxiosResult.data
+        test('Should return correct response on axios.post', async () => {
+            const { sut, mockedAxios } = makeSut();
+            const promise = sut.post(mockPostRequest())
+            expect(promise).toEqual(mockedAxios.post.mock.results?.[0]?.value);
+        });
+
+        test('Should return correct error on axios.post', () => {
+            const { sut, mockedAxios } = makeSut()
+            mockedAxios.post.mockRejectedValueOnce({
+                response: mockHttpResponse()
+            })
+            const promise = sut.post(mockPostRequest());
+            expect(promise).toEqual(mockedAxios.post.mock.results?.[0]?.value)
         });
     });
-
-    test('Should return the correct statusCode and body on failure', async () => {
-        const sut = makeSut();
-        mockedAxios.post.mockRejectedValueOnce({
-            response: mockHttpResponse()
-        })
-        const promise = sut.post(mockPostRequest());
-        expect(promise).toEqual(mockedAxios.post.mock.results?.[0]?.value)
-    });
-});
-=======
-            expect(promise).toEqual(mockedAxios.post.mock.results[0].value)
-        });
-    })
 
     describe('get', () => {
         test('Should call axios.get with correct values', async () => {
@@ -81,7 +73,6 @@ describe('AxiosHttpClient', () => {
             expect(promise).toEqual(mockedAxios.get.mock.results[0].value)
         });
     })
->>>>>>> 52d176295d469fdb75d86bf506df1ba42efb8637
 });
 
 
