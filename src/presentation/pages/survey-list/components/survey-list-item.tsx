@@ -8,6 +8,7 @@ const SurveyItem = () => {
     return (
         <li className={Styles.surveyItemWrap}>
             <div className={Styles.surveyContent}>
+                {/* <Icon className={Styles.survey} iconName={IconName.thumbDown} /> */}
                 <time>
                     <span className={Styles.day}>22</span>
                     <span className={Styles.month}>03</span>

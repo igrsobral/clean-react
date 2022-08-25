@@ -25,6 +25,37 @@
     background-size: 54px 100%, 100% 100%;
     position: relative;
 
+    time{
+      display: flex;
+      flex-direction: column;
+      background-color: $primaryLight;
+      color: $white;
+      border-radius: 8px;
+      margin-left: 24px;
+      align-self: 24px;
+      align-items: center;
+      justify-content: center;
+      width: 60px;
+      height: 100px;
+      flex-shrink: 0;
+      position: relative;
+      top: 30%; 
+
+      .day{
+        font-size: 40px;
+        font-weight: bold;
+      }
+
+      .month{
+        text-transform: lowercase;
+        margin: 0 0 8px;
+      }
+
+      .year{
+        font-size: 16px;
+      }
+    }
+
     .iconWrap {
       position: absolute;
       top: -10px;
