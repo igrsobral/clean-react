@@ -4,16 +4,16 @@ import { Footer, LoginHeader, Input, FormStatus } from '@/presentation/component
 import { Link, useHistory } from 'react-router-dom';
 import Context from '@/presentation/contexts/form/form-context';
 import { Validation } from '@/presentation/protocols/validation';
-import { AddAccount, SaveAccessToken } from '@/domain/useCases';
+import { AddAccount, UpdateCurrentAccount } from '@/domain/useCases';
 import SubmitButton from '@/presentation/components/submitButton/submitButton';
 
 type Props = {
     validation: Validation;
     addAccount: AddAccount;
-    saveAccessToken: SaveAccessToken;
+    updateCurrentAccount: UpdateCurrentAccount;
 }
 
-const SignUp = ({ validation, addAccount, saveAccessToken }: Props) => {
+const SignUp = ({ validation, addAccount, updateCurrentAccount }: Props) => {
     const history = useHistory();
     const [state, setState] = useState({
         isLoading: false,
@@ -61,7 +61,7 @@ const SignUp = ({ validation, addAccount, saveAccessToken }: Props) => {
                 password: state.password,
                 passwordConfirmation: state.passwordConfirmation,
             });
-            await saveAccessToken.save(account.accessToken);
+            await updateCurrentAccount.save(account);
             history.replace('/');
         } catch (error) {
             setState({
