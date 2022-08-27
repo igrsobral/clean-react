@@ -1,20 +1,21 @@
-import React, { FormEvent, useEffect, useState } from 'react';
+import React, { FormEvent, useContext, useEffect, useState } from 'react';
 import S from './signup-styles.scss';
 import { Footer, LoginHeader, Input, FormStatus } from '@/presentation/components';
 import { Link, useHistory } from 'react-router-dom';
 import Context from '@/presentation/contexts/form/form-context';
 import { Validation } from '@/presentation/protocols/validation';
-import { AddAccount, UpdateCurrentAccount } from '@/domain/useCases';
+import { AddAccount } from '@/domain/useCases';
 import SubmitButton from '@/presentation/components/submitButton/submitButton';
+import { ApiContext } from '@/presentation/contexts';
 
 type Props = {
     validation: Validation;
     addAccount: AddAccount;
-    updateCurrentAccount: UpdateCurrentAccount;
 }
 
-const SignUp = ({ validation, addAccount, updateCurrentAccount }: Props) => {
+const SignUp = ({ validation, addAccount }: Props) => {
     const history = useHistory();
+    const { setCurrentAccount } = useContext(ApiContext)
     const [state, setState] = useState({
         isLoading: false,
         isFormInvalid: true,
@@ -61,7 +62,7 @@ const SignUp = ({ validation, addAccount, updateCurrentAccount }: Props) => {
                 password: state.password,
                 passwordConfirmation: state.passwordConfirmation,
             });
-            await updateCurrentAccount.save(account);
+            setCurrentAccount(account);
             history.replace('/');
         } catch (error) {
             setState({

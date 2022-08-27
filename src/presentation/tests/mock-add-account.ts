@@ -1,6 +1,6 @@
 import { AccountModel } from '@/domain/models';
 import { mockAccountModel } from '@/domain/test';
-import { AddAccount, AddAccountParams, AuthenticationParams } from '@/domain/useCases';
+import { AddAccount, AddAccountParams } from '@/domain/useCases';
 
 export class AddAccountSpy implements AddAccount {
     account = mockAccountModel();
