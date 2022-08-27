@@ -32,6 +32,7 @@ export const mockUnexpectedError = (url: RegExp, method: Method): void => {
 }
 
 export const mockOk = (url: RegExp, method: Method, response: any): void => {
+    cy.server()
     cy.intercept(url, (req) => {
         req.reply((res) => {
             // replaces 'res.body' with "Success" and sends the response to the browser
