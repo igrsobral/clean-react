@@ -157,7 +157,8 @@ describe('Login component', () => {
         jest.spyOn(updateCurrentAccount, 'save').mockReturnValueOnce(Promise.reject(error));
         await simulateValidSubmit(sut);
         testElementText(sut, 'main-error', error.message)
-        Helper.testChildCount(sut, 'error-wrap', 1)
+        const count = Helper.testChildCount(sut, 'error-wrap', 1)
+        console.log(count)
     })
 
     test('Should go to login page', async () => {
