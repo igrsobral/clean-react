@@ -91,13 +91,6 @@ describe('Login', () => {
         FormHelper.testLocalStorageItem('account')
     });
 
-    // it('Should prevent multiples submits', () => {
-    //     Http.mockOk();
-    //     populateFields();
-    //     cy.getByTestId('submit').dblclick()
-    //     FormHelper.testHttpCallCount(1)
-    // });
-
     it('Should not call submit if form is invalid', () => {
         Http.mockOk();
         cy.getByTestId('email').focus().type(faker.internet.email()).type('{enter}');

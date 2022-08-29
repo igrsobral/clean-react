@@ -7,8 +7,6 @@ import { ApiContext } from '@/presentation/contexts'
 
 import SurveyList from '@/presentation/pages/survey-list/survey-list';
 import { setCurrentAccountAdapter } from '@/main/adapters/current-account-adapter';
-
-
 const Router = () => {
     return (
         <ApiContext.Provider value={{
