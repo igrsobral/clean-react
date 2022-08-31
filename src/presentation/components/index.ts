@@ -8,5 +8,7 @@ export { default as Spinner } from './spinner/spinner';
 export { default as Router } from '../../main/routes/router';
 export { default as SubmitButton } from './submitButton/submitButton';
 export { default as Header } from './header/header';
+export { default as PrivateRoute } from './private-route/private-route';
+
 
 

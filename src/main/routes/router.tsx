@@ -7,6 +7,7 @@ import { ApiContext } from '@/presentation/contexts'
 
 import SurveyList from '@/presentation/pages/survey-list/survey-list';
 import { getCurrentAccountAdapter, setCurrentAccountAdapter } from '@/main/adapters/current-account-adapter';
+import { PrivateRoute } from '@/presentation/components';
 const Router = () => {
     return (
         <ApiContext.Provider value={{
@@ -15,7 +16,7 @@ const Router = () => {
         }}>
             <BrowserRouter>
                 <Switch>
-                    <Route path="/" exact component={SurveyList} />
+                    <PrivateRoute path="/" exact component={SurveyList} />
                     <Route path="/login" exact component={makeLogin} />
                     <Route path="/signup" exact component={makeSignUp} />
                 </Switch>
