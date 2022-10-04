@@ -1,6 +1,7 @@
 import { Footer, Header } from '@/presentation/components'
 import React from 'react'
-import SurveyItem from './components/survey-list-item'
+import { SurveyItemEmpty } from '@/presentation/pages/survey-list/components'
+// import SurveyItem from './components/survey-list-item'
 import Styles from './survey-list-styles.scss'
 
 export default function SurveyList() {
@@ -9,8 +10,9 @@ export default function SurveyList() {
             <Header />
             <div className={Styles.contentWrap}>
                 <h2>Enquetes</h2>
-                <ul>
-                    <SurveyItem />
+                <ul data-testid="survey-list">
+                    {/* <SurveyItem /> */}
+                    <SurveyItemEmpty />
                 </ul>
             </div>
             <Footer />
