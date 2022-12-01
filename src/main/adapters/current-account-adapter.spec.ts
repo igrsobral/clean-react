@@ -17,6 +17,7 @@ describe('CurrentAccountAdapter', () => {
         const result = getCurrentAccountAdapter()
         expect(getSpy).toHaveBeenCalledWith('account')
         expect(result).toEqual(account)
+        
     })
 
     test('should throw UnexpectedError', () => {

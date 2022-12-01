@@ -5,7 +5,11 @@ import { BrowserRouter } from "react-router-dom";
 
 
 const makeSut = (): void => {
-    render(<BrowserRouter> <SurveyList />  </BrowserRouter>)
+    render(
+        <BrowserRouter>
+            <SurveyList /> 
+         </BrowserRouter>
+    )
 }
 
 describe('SurveyList Component', () => {
