@@ -1,5 +1,4 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
 import Styles from './item-styles.scss'
 import { IconName, Icon } from '@/presentation/components'
 import { SurveyModel } from '@/domain/models'

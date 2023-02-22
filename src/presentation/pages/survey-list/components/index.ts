@@ -1,2 +1,5 @@
-export { default as SurveyItemEmpty } from './survey-item-empty/survey-item-empty'
-export { default as SurveyListItem } from './survey-list-item/survey-list-item'
+export { default as SurveyItem } from './item/item'
+export { default as SurveyItemEmpty } from './item-empty/item-empty'
+export { default as SurveyListItem } from './list/list'
+export { default as Error } from './error/error'
+export { default as SurveyContext } from './context/context'

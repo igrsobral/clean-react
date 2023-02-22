@@ -1,4 +1,4 @@
-import SurveyItem from "@/presentation/pages/survey-list/components/survey-list-item/survey-list-item";
+import { SurveyItem } from "@/presentation/pages/survey-list/components";
 import { render, screen } from '@testing-library/react';
 import React from 'react'
 import { mockSurveyModel } from "@/domain/test";

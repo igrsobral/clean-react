@@ -1,10 +1,9 @@
-import { Footer, Header } from '@/presentation/components'
 import React, { useEffect, useState } from 'react'
-import { SurveyItemEmpty } from '@/presentation/pages/survey-list/components'
-import Styles from './survey-list-styles.scss'
+import { SurveyContext, SurveyListItem, Error } from '@/presentation/pages/survey-list/components'
 import { LoadSurveyList } from '@/domain/useCases'
+import { Footer, Header } from '@/presentation/components'
 import { SurveyModel } from '@/domain/models'
-import SurveyItem from './components/survey-list-item/survey-list-item'
+import Styles from './survey-list-styles.scss'
 
 type Props = {
     loadSurveyList: LoadSurveyList;
@@ -27,18 +26,12 @@ export default function SurveyList({ loadSurveyList }: Props) {
             <Header />
             <div className={Styles.contentWrap}>
                 <h2>Enquetes</h2>
-                {state.error 
-                ? <div>
-                    <span data-testid="error">{state.error}</span>
-                    <button>Recarregar</button>
-                </div>
-                :  
-                <ul data-testid="survey-list">
-                    {state.surveys.length 
-                    ? state.surveys.map((survey) => <SurveyItem key={survey.id} survey={survey} />)
-                    : <SurveyItemEmpty /> }
-                </ul>
-                }
+                <SurveyContext.Provider value={{ state, setState }}>
+                 {state.error 
+                    ?   <Error />
+                    :   <SurveyListItem />
+                  }
+                </SurveyContext.Provider>
             </div>
             <Footer />
         </div>
