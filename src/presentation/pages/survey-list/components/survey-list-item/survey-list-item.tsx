@@ -2,20 +2,32 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import Styles from './item-styles.scss'
 import { IconName, Icon } from '@/presentation/components'
+import { SurveyModel } from '@/domain/models'
 
-const SurveyItem = () => {
+type Props = {
+    survey: SurveyModel;
+}
+
+const SurveyItem = ({ survey }: Props) => {
     return (
         <li className={Styles.surveyItemWrap}>
             <div className={Styles.surveyContent}>
-                <Icon className={Styles.survey} iconName={IconName.thumbDown} />
+                <Icon className={Styles.survey} iconName={IconName.thumbUP} />
                 <time>
-                    <span className={Styles.day}>22</span>
-                    <span className={Styles.month}>03</span>
-                    <span className={Styles.year}>2020</span>
+                    <span data-testid="day" className={Styles.day}>
+                        {survey.date.getDate()}
+                    </span>
+                    <span data-testid="month" className={Styles.month}>
+                    {survey.date.toLocaleDateString('pt-BR', {
+                        month: 'short'
+                    }).replace('.', '')}</span>
+                    <span data-testid="year" className={Styles.year}>
+                        {survey.date.getFullYear()}
+                    </span>
                 </time>
-                <p data-testid="question">Qual framework web do momento?</p>
+                <p data-testid="question">{ survey.question }?</p>
             </div>
-            <footer><Link data-testid="link" to={'/'} >Ver Resultado</Link></footer>
+            <footer>Ver Resultado</footer>
         </li>
     )
 }
