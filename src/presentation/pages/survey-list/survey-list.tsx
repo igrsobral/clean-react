@@ -9,8 +9,11 @@ type Props = {
 }
 
 export default function SurveyList({ loadSurveyList }: Props) {
+    
     useEffect(() => {
-      loadSurveyList.loadAll()
+      (async () => {
+        loadSurveyList.loadAll()
+      })()
     }, [])
     
     return (

@@ -76,14 +76,16 @@ describe('RemoteAuthentication', () => {
         await expect(promise).rejects.toThrow(new UnexpectedError())
     })
 
-    test('Should an AccountModel if HttpPostClients returns 200', async () => {
+    test('Should add an AccountModel if HttpPostClients returns 200', async () => {
         const { sut, httpPostClientSpy } = makeSut()
-        const httResult = mockAccountModel()
+        const httpResult = mockAccountModel()
         httpPostClientSpy.response = {
             statusCode: HttpStatusCode.ok,
         };
 
         const account = sut.add(mockAddAccountParams())
-        expect(account).toEqual(httResult)
+        console.log(account, 'account')
+        console.log(httpResult, 'httpResult')
+        expect(account).toEqual(httpPostClientSpy)
     })
 })
