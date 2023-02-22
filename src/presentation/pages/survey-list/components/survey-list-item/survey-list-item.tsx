@@ -9,18 +9,20 @@ type Props = {
 }
 
 const SurveyItem = ({ survey }: Props) => {
+    const iconName = survey.didAnswer ? IconName.thumbUP : IconName.thumbDown
     return (
         <li className={Styles.surveyItemWrap}>
             <div className={Styles.surveyContent}>
-                <Icon className={Styles.survey} iconName={IconName.thumbUP} />
+                <Icon className={Styles.survey} iconName={iconName} />
                 <time>
                     <span data-testid="day" className={Styles.day}>
-                        {survey.date.getDate()}
+                     {survey.date.getDate().toString().padStart(2, '0')}
                     </span>
                     <span data-testid="month" className={Styles.month}>
                     {survey.date.toLocaleDateString('pt-BR', {
                         month: 'short'
-                    }).replace('.', '')}</span>
+                    }).replace('.', '')}
+                    </span>
                     <span data-testid="year" className={Styles.year}>
                         {survey.date.getFullYear()}
                     </span>
