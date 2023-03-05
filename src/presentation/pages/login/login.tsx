@@ -1,4 +1,4 @@
-import React, { FormEvent, useContext, useEffect, useState } from 'react';
+import React, { FormEvent, useContext, useEffect, useReducer, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { Footer, LoginHeader, Input, FormStatus } from '@/presentation/components';
 import Context from '@/presentation/contexts/form/form-context';
@@ -64,6 +64,7 @@ const Login = ({ validation, authentication }: Props) => {
             });
         }
     }
+
 
     return (
         <div className={S.login}>
