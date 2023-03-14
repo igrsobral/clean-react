@@ -19,19 +19,19 @@ export default function SurveyList({ loadSurveyList }: Props) {
     useEffect(() => {
         loadSurveyList.loadAll()
             .then(surveys => setState({ ...state, surveys }))
-            .catch(error => setState({ ...state, error: error.message }))
+            .catch(({ message: error }) => setState({ ...state, error }))
     }, [state.reload])
-    
+
     return (
         <div className={Styles.surveyListWrap}>
             <Header />
             <div className={Styles.contentWrap}>
                 <h2>Enquetes</h2>
                 <SurveyContext.Provider value={{ state, setState }}>
-                 {state.error 
-                    ?   <Error />
-                    :   <SurveyListItem />
-                  }
+                    {state.error
+                        ? <Error />
+                        : <SurveyListItem />
+                    }
                 </SurveyContext.Provider>
             </div>
             <Footer />
