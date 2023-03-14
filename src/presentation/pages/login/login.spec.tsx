@@ -4,15 +4,16 @@ import { createMemoryHistory } from 'history';
 import Login from "./login";
 import { fireEvent, waitFor, screen, render } from '@testing-library/react';
 import 'jest-localstorage-mock';
-import { ValidationStub, AuthenticationSpy, Helper } from '@/presentation/tests';
+import { ValidationStub, Helper } from '@/presentation/tests';
 import faker from 'faker';
 import { InvalidCredentialsError } from '@/domain/errors';
-import { AccountModel } from '@/domain/models';
 import { ApiContext } from '@/presentation/contexts';
+import { Authentication } from '@/domain/useCases';
+import { AuthenticationSpy } from '@/domain/test';
 
 type SutTypes = {
     authenticationSpy: AuthenticationSpy;
-    setCurrentAccountMock: (account: AccountModel) => void;
+    setCurrentAccountMock: (account: Authentication.Model) => void;
 }
 
 type SutParams = {

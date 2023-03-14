@@ -3,15 +3,16 @@ import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import SignUp from "./signup";
 import faker from 'faker';
 import { createMemoryHistory } from 'history';
-import { Helper, ValidationStub, AddAccountSpy } from '@/presentation/tests';
+import { Helper, ValidationStub } from '@/presentation/tests';
 import { EmailInUseError } from '@/domain/errors';
 import { Router } from 'react-router-dom';
 import { ApiContext } from '@/presentation/contexts';
-import { AccountModel } from '@/domain/models';
+import { AddAccount } from '@/domain/useCases';
+import { AddAccountSpy } from '@/domain/test';
 
 type SutTypes = {
     addAccountSpy: AddAccountSpy;
-    setCurrentAccountMock: (account: AccountModel) => void;
+    setCurrentAccountMock: (account: AddAccount.Model) => void;
 }
 
 type SutParams = {
