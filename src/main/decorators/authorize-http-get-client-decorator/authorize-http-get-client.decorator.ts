@@ -20,7 +20,7 @@ export class AuthorizeHttpGetClientDecorator implements HttpGetClient{
       }
     }
 
-    await this.httpGetClient.get(newHeaders)
-    return  null
+    const httpResponse = await this.httpGetClient.get(newHeaders)
+    return  httpResponse
    }
 }
