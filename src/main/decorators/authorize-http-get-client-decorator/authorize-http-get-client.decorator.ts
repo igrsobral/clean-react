@@ -9,14 +9,15 @@ export class AuthorizeHttpGetClientDecorator implements HttpGetClient{
 
    async get (params: HttpGetParams): Promise<HttpResponse> {
     const account = this.getStorage.get('account')
-    let newHeaders: HttpGetParams = params
+    let newHeaders = params
     if(account?.accessToken) {
-       newHeaders = {
-         ...params,
-         headers: {
-            'x-access-token': account.accessToken
-         }
-       }
+      newHeaders = {
+        ...params,
+        headers: {
+          ...params.headers || {},
+          'x-access-token': account.accessToken
+        }
+      }
     }
 
     await this.httpGetClient.get(newHeaders)
