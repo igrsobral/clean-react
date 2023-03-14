@@ -148,6 +148,6 @@ describe('Login component', () => {
         const loginLink = screen.queryByTestId('login-link');
         fireEvent.click(loginLink);
         expect(history.length).toBe(1);
-        expect(history.location.pathname).toBe('/login')
+        expect(history.location.pathname).toBe('/signup')
     })
 });

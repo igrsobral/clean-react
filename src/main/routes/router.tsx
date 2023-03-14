@@ -14,9 +14,9 @@ const Router = () => {
         }}>
             <BrowserRouter>
                 <Switch>
-                    <PrivateRoute path="/" exact component={makeSurveyList} />
                     <Route path="/login" exact component={makeLogin} />
                     <Route path="/signup" exact component={makeSignUp} />
+                    <PrivateRoute path="/" exact component={makeSurveyList} />
                 </Switch>
             </BrowserRouter>
         </ApiContext.Provider>
