@@ -80,7 +80,20 @@ describe('RemoteLoadSurveyList', () => {
             question: httpResult[0].question,
             didAnswer: httpResult[0].didAnswer,
             date: httpResult[0].date
-        }])
+        },
+        {
+            id: httpResult[1].id,
+            question: httpResult[1].question,
+            didAnswer: httpResult[1].didAnswer,
+            date: httpResult[1].date
+        },
+        {
+            id: httpResult[2].id,
+            question: httpResult[2].question,
+            didAnswer: httpResult[2].didAnswer,
+            date: httpResult[2].date
+        }
+        ])
     })
 
     test('Should return a empty list of SurveyModels if HttpGetClient returns 204', async () => {
