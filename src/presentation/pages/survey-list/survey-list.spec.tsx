@@ -1,16 +1,18 @@
 import { LoadSurveyList } from '@/domain/useCases';
 import { SurveyList } from "@/presentation/pages";
 import { fireEvent, render, screen, waitFor } from '@testing-library/react'
-import { BrowserRouter } from "react-router-dom";
+import { Router } from "react-router-dom";
 import React from 'react'
 import { mockSurveyListModel } from '@/domain/test';
 import { UnexpectedError } from '@/domain/errors';
+import { createMemoryHistory } from 'history'
+import ApiContext from '@/presentation/contexts/api/api-context';
 
-class LoadSurveyListSpy implements LoadSurveyList{
+class LoadSurveyListSpy implements LoadSurveyList {
     callsCount = 0
-    surveys =  mockSurveyListModel();
+    surveys = mockSurveyListModel();
 
-    async loadAll (): Promise<LoadSurveyList.Model[]>{
+    async loadAll(): Promise<LoadSurveyList.Model[]> {
         this.callsCount++
         return this.surveys;
     }
@@ -22,11 +24,13 @@ type SutTypes = {
 
 const makeSut = (loadSurveyListSpy = new LoadSurveyListSpy()): SutTypes => {
     render(
-        <BrowserRouter>
-           <SurveyList loadSurveyList={loadSurveyListSpy}/> 
-         </BrowserRouter>
+        <ApiContext.Provider value={{ setCurrentAccount: jest.fn() }}>
+            <Router history={createMemoryHistory()}>
+                <SurveyList loadSurveyList={loadSurveyListSpy} />
+            </Router>
+        </ApiContext.Provider>
     )
-    return { 
+    return {
         loadSurveyListSpy
     }
 }
@@ -39,20 +43,20 @@ describe('SurveyList Component', () => {
         expect(screen.queryByTestId('error')).not.toBeInTheDocument()
         await waitFor(() => surveyList)
     })
-   
+
     test('Should call LoadSurveyList', async () => {
         const { loadSurveyListSpy } = makeSut()
         expect(loadSurveyListSpy.callsCount).toBe(1)
         await waitFor(() => screen.getByRole('heading'))
     })
-    
+
     test('Should render SurveyItem on success', async () => {
         makeSut()
         const surveyList = screen.getByTestId('survey-list')
         await waitFor(() => surveyList)
         expect(surveyList.querySelectorAll('li')).toHaveLength(4)
     })
-    
+
     test('Should render error on failure', async () => {
         const loadSurveyListSpy = new LoadSurveyListSpy()
         const error = new UnexpectedError()
@@ -62,7 +66,7 @@ describe('SurveyList Component', () => {
         expect(screen.queryByTestId('survey-list')).not.toBeInTheDocument()
         expect(screen.queryByTestId('error')).toHaveTextContent(error.message)
     })
-    
+
     test('Should call LoadSurveyList on reload', async () => {
         const loadSurveyListSpy = new LoadSurveyListSpy()
         jest.spyOn(loadSurveyListSpy, 'loadAll').mockRejectedValueOnce(new UnexpectedError())
