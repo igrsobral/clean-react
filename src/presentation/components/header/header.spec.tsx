@@ -1,11 +1,11 @@
-import React from 'react'
-import { fireEvent, render, screen } from '@testing-library/react'
 import { Header } from '@/presentation/components'
-import { createMemoryHistory, MemoryHistory } from 'history'
-import { Router } from 'react-router-dom'
-import ApiContext from '@/presentation/contexts/api/api-context'
-import { AccountModel } from '@/domain/models'
+import { ApiContext } from '@/presentation/contexts'
 import { mockAccountModel } from '@/domain/test'
+import { AccountModel } from '@/domain/models'
+import { createMemoryHistory, MemoryHistory } from 'history'
+import { fireEvent, render, screen } from '@testing-library/react'
+import { Router } from 'react-router-dom'
+import React from 'react'
 
 type SutTypes = {
     history: MemoryHistory
