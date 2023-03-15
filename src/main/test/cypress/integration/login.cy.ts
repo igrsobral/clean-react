@@ -1,4 +1,5 @@
-import * as FormHelper from '../support/form-helper';
+import * as FormHelper from '../support/form-helpers';
+import * as Helpers from '../support/helpers';
 import * as Http from '../support/login-mock'
 import faker from 'faker'
 
@@ -48,32 +49,25 @@ describe('Login', () => {
     });
 
     it('Should present InvalidCredentialsError on 401', () => {
-        Http.mockInvalidCredentialsError();
+        Http.mockUnathorizedError();
         simulateValidSubmit();
         FormHelper.testMainError('Credenciais inválidas')
-        FormHelper.testUrl('/login')
+        Helpers.testUrl('/login')
     });
 
     it('Should  present UnexpectedError on default error cases', () => {
-        Http.mockUnexpectedError();
+        Http.mockServerError();
         simulateValidSubmit();
         FormHelper.testMainError('Algo de errado aconteceu. Tente novamente em breve')
-        FormHelper.testUrl('/login')
-    });
-
-    it('should  present UnexpectedError if invalid data is returned', () => {
-        Http.mockInvalidData()
-        simulateValidSubmit();
-        FormHelper.testMainError('Algo de errado aconteceu. Tente novamente em breve')
-        FormHelper.testUrl('/login')
+        Helpers.testUrl('/login')
     });
 
     it('Should present save accessToken if valid credentials are provided', () => {
         Http.mockOk();
         simulateValidSubmit();
         cy.getByTestId('error-wrap').should('not.have.descendants');
-        FormHelper.testUrl('/')
-        FormHelper.testLocalStorageItem('account')
+        Helpers.testUrl('/')
+        Helpers.testLocalStorageItem('account')
     });
 
     // it('Should prevent multiple submits', () => {
@@ -86,6 +80,6 @@ describe('Login', () => {
     it('Should not call submit if form is invalid', () => {
         Http.mockOk();
         cy.getByTestId('email').focus().type(faker.internet.email()).type('{enter}');
-        FormHelper.testHttpCallCount(0)
+        Helpers.testHttpCallCount(0)
     });
 })

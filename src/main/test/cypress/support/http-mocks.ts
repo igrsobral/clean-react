@@ -1,8 +1,8 @@
 import { Method } from 'axios'
 import faker from 'faker'
 
-export const mockInvalidCredentialsError = (url: RegExp): void => {
-    cy.intercept('POST', url, {
+export const mockUnathorizedError = (url: RegExp, method: Method): void => {
+    cy.intercept(method, url, {
         statusCode: 401,
         response: {
             error: faker.random.words()
@@ -11,8 +11,8 @@ export const mockInvalidCredentialsError = (url: RegExp): void => {
     }).as('request')
 }
 
-export const mockEmailInUseError = (url: RegExp): void => {
-    cy.intercept('POST', url, {
+export const mockEmailInUseError = (url: RegExp, method: Method): void => {
+    cy.intercept(method, url, {
         statusCode: 403,
         response: {
             error: faker.random.words()
@@ -21,7 +21,7 @@ export const mockEmailInUseError = (url: RegExp): void => {
     }).as('request')
 }
 
-export const mockUnexpectedError = (url: RegExp, method: Method): void => {
+export const mockServerError = (url: RegExp, method: Method): void => {
     cy.intercept(method, url, {
         statusCode: faker.helpers.randomize([400, 404, 500]),
         response: {
@@ -36,7 +36,7 @@ export const mockOk = (url: RegExp, method: Method, response: any): void => {
         req.reply((res) => {
             // replaces 'res.body' with "Success" and sends the response to the browser
             res.send(method as unknown as number, {
-
+                data: response
             }, {
                 response
             })

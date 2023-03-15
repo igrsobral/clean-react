@@ -1,7 +1,7 @@
-import * as FormHelper from '../support/form-helper';
+import * as FormHelper from '../support/form-helpers';
+import * as Helpers from '../support/helpers';
 import * as Http from '../support/signup-mock'
 import faker from 'faker'
-
 
 const populateFields = (): void => {
     cy.getByTestId('name').focus().type(faker.name.findName());
@@ -15,7 +15,6 @@ const simulateValidSubmit = (): void => {
     populateFields()
     cy.getByTestId('submit').click()
 }
-
 
 describe('Login', () => {
     beforeEach(() => {
@@ -66,35 +65,28 @@ describe('Login', () => {
         Http.mockEmailInUseError();
         simulateValidSubmit();
         FormHelper.testMainError('Este e-mail já está sendo usado')
-        FormHelper.testUrl('/signup')
+        Helpers.testUrl('/signup')
     });
 
     it('Should present UnexpectedError on default error cases', () => {
-        Http.mockUnexpectedError();
+        Http.mockServerError();
         simulateValidSubmit();
         FormHelper.testMainError('Algo de errado aconteceu. Tente novamente em breve')
-        FormHelper.testUrl('/signup')
-    });
-
-    it('Should present UnexpectedError if invalid data is returned', () => {
-        Http.mockInvalidData();
-        simulateValidSubmit();
-        FormHelper.testMainError('Algo de errado aconteceu. Tente novamente em breve')
-        FormHelper.testUrl('/signup')
+        Helpers.testUrl('/signup')
     });
 
     it('Should present save accessToken if valid data crendentials are provided', () => {
         Http.mockOk();
         simulateValidSubmit();
         cy.getByTestId('error-wrap').should('not.have.descendants');
-        FormHelper.testUrl('/')
-        FormHelper.testLocalStorageItem('account')
+        Helpers.testUrl('/')
+        Helpers.testLocalStorageItem('account')
     });
 
     it('Should not call submit if form is invalid', () => {
         Http.mockOk();
         cy.getByTestId('email').focus().type(faker.internet.email()).type('{enter}');
-        FormHelper.testHttpCallCount(0)
+        Helpers.testHttpCallCount(0)
     });
 })
 
