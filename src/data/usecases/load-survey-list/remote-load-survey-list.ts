@@ -19,5 +19,10 @@ export class RemoteLoadSurveyList implements LoadSurveyList {
 }
 
 export namespace RemoteLoadSurveyList {
-    export type Model = LoadSurveyList.Model
+    export type Model = {
+        id: string;
+        question: string;
+        date: string;
+        didAnswer: boolean
+    }
 }
