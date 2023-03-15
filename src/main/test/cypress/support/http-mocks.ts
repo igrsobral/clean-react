@@ -11,6 +11,16 @@ export const mockUnathorizedError = (url: RegExp, method: Method): void => {
     }).as('request')
 }
 
+export const mockForbiddenError = (url: RegExp, method: Method): void => {
+    cy.intercept(method, url, {
+        statusCode: 403,
+        response: {
+            error: faker.random.words()
+        },
+        hostname: 'localhost'
+    }).as('request')
+}
+
 export const mockEmailInUseError = (url: RegExp, method: Method): void => {
     cy.intercept(method, url, {
         statusCode: 403,
