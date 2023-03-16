@@ -5,7 +5,7 @@ import faker from 'faker'
 
 const mockEmailInUseError = (): void => Http.mockEmailInUseError(/signup/, 'POST')
 const mockServerError = (): void => Http.mockServerError(/signup/, 'POST')
-const mockSuccess = (): void => Http.mockOk(/signup/, 'POST', 'fx:survey-list')
+const mockSuccess = (): void => Http.mockOk(/signup/, 'POST', 'survey-list')
 
 const populateFields = (): void => {
     cy.getByTestId('name').focus().type(faker.name.findName());

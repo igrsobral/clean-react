@@ -6,7 +6,7 @@ import faker from 'faker'
 const path = /login/
 export const mockUnathorizedError = (): void => Http.mockUnathorizedError(path, 'POST')
 export const mockServerError = (): void => Http.mockServerError(path, 'POST')
-export const mockSuccess = (): void => Http.mockOk(path, 'POST', 'fx:account')
+export const mockSuccess = (): void => Http.mockOk(path, 'POST', 'account')
 
 const populateFields = () => {
     cy.getByTestId('email').focus().type(faker.internet.email());

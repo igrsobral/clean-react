@@ -27,28 +27,18 @@ const Login = ({ validation, authentication }: Props) => {
         main: ''
     });
 
-    useEffect(() => {
-        const { email, password } = state;
-        const formData = { email, password };
-        const emailError = validation.validate('email', formData);
-        const passwordError = validation.validate('password', formData);
-        setState({
-            ...state,
-            emailError,
-            passwordError,
-            isFormInvalid: !!emailError || !!passwordError
-        });
-    }, [state.email, state.password]);
+    const validate = (field: string): void => {
+        setState(old => ({ ...old, [`${field}Error`]: validation.validate(field, state) }))
+        setState(old => ({ ...old, isFormInvalid: !!old.emailError || !!old.passwordError }))
+    }
+
+    useEffect(() => validate('email'), [state.email]);
+    useEffect(() => validate('password'), [state.password]);
 
     const handleSubmit = async (e: FormEvent<HTMLFormElement>): Promise<void> => {
         e.preventDefault();
         try {
             if (state.isLoading || state.isFormInvalid) return;
-            setState({
-                ...state,
-                isLoading: true,
-            });
-
             setState({ ...state, isLoading: true });
             const account = await authentication.auth({
                 email: state.email,
@@ -64,7 +54,6 @@ const Login = ({ validation, authentication }: Props) => {
             });
         }
     }
-
 
     return (
         <div className={S.login}>

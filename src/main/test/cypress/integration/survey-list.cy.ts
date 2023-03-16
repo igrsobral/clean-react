@@ -1,14 +1,11 @@
 import * as Helpers from '../utils/helpers';
 import * as Http from '../utils/http-mocks';
 
-const mockUnexpectedError = (): void => Http.mockServerError(/surveys/, 'GET')
-const mockAccessDeniedError = (): void => Http.mockForbiddenError(/surveys/, 'GET')
-const mockSuccess = (): void => Http.mockOk(/surveys/, 'GET', 'fx:survey-list')
-// const mockSuccess = (): void => {
-//     cy.fixture('survey-list').then(surveyList => {
-//         Http.mockOk(/surveys/, 'GET', surveyList)
-//     })
-// }
+const path = /api\/surveys/
+const mockUnexpectedError = (): void => Http.mockServerError(path, 'GET')
+const mockAccessDeniedError = (): void => Http.mockForbiddenError(path, 'GET')
+const mockSuccess = (): void => Http.mockOk(path, 'GET', 'survey-list')
+
 describe('SurveyList', () => {
     beforeEach(() => {
         cy.fixture('account').then(account => {
@@ -28,6 +25,7 @@ describe('SurveyList', () => {
         cy.getByTestId('error').should('contain.text', 'Algo de errado aconteceu. Tente novamente em breve')
         mockSuccess()
         cy.getByTestId('reload').click()
+        cy.get('li:not(:empty)').should('have.length', 2)
     });
 
     it('Should logout on AccessDeniedError', () => {
