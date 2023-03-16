@@ -1,4 +1,4 @@
-import * as Helper from '../support/helpers'
+import * as Helper from '../utils/helpers'
 
 describe('Login', () => {
     it('Should logout if survey-list has no token', () => {

@@ -1,7 +1,11 @@
-import * as FormHelper from '../support/form-helpers';
-import * as Helpers from '../support/helpers';
-import * as Http from '../support/signup-mock'
+import * as FormHelper from '../utils/form-helpers';
+import * as Helpers from '../utils/helpers';
+import * as Http from '../utils/http-mocks'
 import faker from 'faker'
+
+const mockEmailInUseError = (): void => Http.mockEmailInUseError(/signup/, 'POST')
+const mockServerError = (): void => Http.mockServerError(/signup/, 'POST')
+const mockSuccess = (): void => Http.mockOk(/signup/, 'POST', { accessToken: faker.datatype.uuid() })
 
 const populateFields = (): void => {
     cy.getByTestId('name').focus().type(faker.name.findName());
@@ -62,21 +66,21 @@ describe('Login', () => {
     });
 
     it('Should present EmailInUseError on 403', () => {
-        Http.mockEmailInUseError();
+        mockEmailInUseError();
         simulateValidSubmit();
         FormHelper.testMainError('Este e-mail já está sendo usado')
         Helpers.testUrl('/signup')
     });
 
     it('Should present UnexpectedError on default error cases', () => {
-        Http.mockServerError();
+        mockServerError();
         simulateValidSubmit();
         FormHelper.testMainError('Algo de errado aconteceu. Tente novamente em breve')
         Helpers.testUrl('/signup')
     });
 
     it('Should present save accessToken if valid data crendentials are provided', () => {
-        Http.mockOk();
+        mockSuccess();
         simulateValidSubmit();
         cy.getByTestId('error-wrap').should('not.have.descendants');
         Helpers.testUrl('/')
@@ -84,7 +88,7 @@ describe('Login', () => {
     });
 
     it('Should not call submit if form is invalid', () => {
-        Http.mockOk();
+        mockSuccess();
         cy.getByTestId('email').focus().type(faker.internet.email()).type('{enter}');
         Helpers.testHttpCallCount(0)
     });

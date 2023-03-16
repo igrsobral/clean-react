@@ -10,6 +10,7 @@ export default defineConfig({
     },
     baseUrl: 'http://localhost:8080',
     supportFile: 'src/main/test/cypress/support/index.js',
+    fixturesFolder: 'src/main/test/cypress/fixtures',
     specPattern: 'src/main/test/cypress/integration/**/*.cy.{js,jsx,ts,tsx}',
   },
 })
