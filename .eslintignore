@@ -4,5 +4,6 @@ coverage
 public/js
 dist
 dist/
+dis/index.html
 *.scss
 *.json
