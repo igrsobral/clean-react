@@ -18,5 +18,10 @@ steps:
 - script: npm run build
   displayName: 'npm build'
 
+- task: PublishBuildArtifacts@1    
+  displayName: 'Publish Artifact: drop'
+  inputs:
+    PathtoPublish: '$(build.artifactstagingdirectory)'
+
 # - script: npm run test --if-present
 #   displayName: 'npm test'
