@@ -4,3 +4,4 @@ public
 dist
 dist/
 coverage
+azure-pipelines.yml
