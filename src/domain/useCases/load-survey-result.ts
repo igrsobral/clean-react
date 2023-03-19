@@ -3,17 +3,15 @@ export interface LoadSurveyResult {
 }
 
 export namespace LoadSurveyResult {
-    export type Answer = {
-        image: string
-        answer: string
-        count: number
-        percent: number
-    }
-
     export type Model = {
         question: string;
         date: Date;
-        answers: Answer[];
+        answers: Array<{
+            image?: string
+            answer: string
+            count: number
+            percent: number
+        }>;
     }
 }
 
