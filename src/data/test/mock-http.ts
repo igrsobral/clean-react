@@ -26,7 +26,7 @@ export class HttpPostClientSpy<R = any> implements HttpPostClient<R>{
   }
 }
 
-export class HttpGetClientSpy<R =  any> implements HttpGetClient<R> {
+export class HttpGetClientSpy<R = any> implements HttpGetClient<R> {
   url: string
   headers?: any
   response: HttpResponse<R> = {
@@ -36,7 +36,9 @@ export class HttpGetClientSpy<R =  any> implements HttpGetClient<R> {
   async get(params: HttpGetParams): Promise<HttpResponse<R>> {
     this.url = params.url
     this.headers = params.headers
-    
+
     return this.response
   }
 }
+
+
