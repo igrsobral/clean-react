@@ -5,14 +5,11 @@ type Props = React.HTMLAttributes<HTMLElement> & {
     isNegative?: boolean
 }
 
-function Spinner(props: Props) {
-    const negativeClass = props.isNegative ? S.negative : ''
+const Spinner = ({ isNegative, ...props }: Props) => {
+    const negativeClass = isNegative ? S.negative : ''
     return (
-        <div {...props} className={[S.spinner, negativeClass, props.className].join(' ')} data-testid="spinner" >
-            <div>
-            </div>
-            <div>
-            </div>
+        <div {...props} data-testid="spinner" className={[S.spinner, negativeClass, props.className].join(' ')}  >
+            <div>  </div> <div> </div>
         </div>
     )
 }
