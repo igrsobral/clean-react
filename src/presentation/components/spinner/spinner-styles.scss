@@ -1,4 +1,6 @@
 $primary: #880E4F;
+$white: #fff;
+
 
 
 .spinner {
@@ -6,6 +8,12 @@ $primary: #880E4F;
     position: relative;
     width: 80px;
     height: 80px;
+
+    &.negative{
+      div {
+        background: $white;
+      }
+    }
   }
   .spinner div {
     position: absolute;
