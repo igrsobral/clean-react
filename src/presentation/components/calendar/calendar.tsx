@@ -1,5 +1,5 @@
-import React from 'react'
 import Styles from './calendar-styles.scss'
+import React from 'react'
 
 interface CalendarProps {
     date: Date
