@@ -1,4 +1,4 @@
-import { Header, Footer, Spinner } from '@/presentation/components'
+import { Header, Footer, Loading } from '@/presentation/components'
 import Styles from './survey-result-styles.scss'
 import FlipMove from 'react-flip-move'
 import React from 'react'
@@ -33,12 +33,7 @@ export default function SurveyResult() {
                     </li>
                 </FlipMove>
                 <button>Voltar</button>
-                {/* <div className={Styles.loadingWrap}>
-                    <div className={Styles.loading}>
-                        <span>Aguarde...</span>
-                        <Spinner isNegative />
-                    </div>
-                </div> */}
+                {false && <Loading />}
             </div>
             <Footer />
         </div>
