@@ -39,7 +39,7 @@ const Login = ({ validation, authentication }: Props) => {
         e.preventDefault();
         try {
             if (state.isLoading || state.isFormInvalid) return;
-            setState({ ...state, isLoading: true });
+            setState(old => ({ ...old, isLoading: true }));
             const account = await authentication.auth({
                 email: state.email,
                 password: state.password
@@ -47,11 +47,11 @@ const Login = ({ validation, authentication }: Props) => {
             setCurrentAccount(account);
             history.replace('/');
         } catch (error) {
-            setState({
-                ...state,
+            setState(old => ({
+                ...old,
                 isLoading: false,
                 main: error.message
-            });
+            }));
         }
     }
 

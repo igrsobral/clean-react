@@ -48,7 +48,7 @@ const SignUp = ({ validation, addAccount }: Props) => {
                 return;
             }
 
-            setState({ ...state, isLoading: true });
+            setState(old => ({ ...old, isLoading: true }));
             const account = await addAccount.add({
                 name: state.name,
                 email: state.email,

@@ -21,7 +21,7 @@ export default function SurveyList({ loadSurveyList }: Props) {
 
     useEffect(() => {
         loadSurveyList.loadAll()
-            .then(surveys => setState({ ...state, surveys }))
+            .then(surveys => setState(old => ({ ...old, surveys })))
             .catch(handleError)
     }, [state.reload])
 
