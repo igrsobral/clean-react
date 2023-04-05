@@ -6,9 +6,9 @@ export default function List() {
   const { state } = useContext(SurveyContext)
   return (
     <ul className={Styles.listWrap} data-testid="survey-list">
-        {state.surveys.length 
+      {state.surveys.length
         ? state.surveys.map((survey) => <SurveyItem key={survey.id} survey={survey} />)
-        : <SurveyItemEmpty /> }
+        : <SurveyItemEmpty />}
     </ul>
   )
 }

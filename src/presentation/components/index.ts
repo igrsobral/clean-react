@@ -11,6 +11,8 @@ export { default as Header } from './header/header';
 export { default as PrivateRoute } from './private-route/private-route';
 export { default as Loading } from './loading/loading';
 export { default as Calendar } from './calendar/calendar';
+export { default as Error } from './error/error';
+
 
 
 

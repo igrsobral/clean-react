@@ -14,7 +14,7 @@ const SurveyItem = ({ survey }: Props) => {
             <div className={Styles.surveyContent}>
                 <Icon className={Styles.survey} iconName={iconName} />
                 <Calendar date={survey.date} className={Styles.calendarWrap} />
-                <p data-testid="question">{survey.question}?</p>
+                <p data-testid="question">{survey.question} ?</p>
             </div>
             <footer>Ver Resultado</footer>
         </li>
