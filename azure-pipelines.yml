@@ -32,13 +32,11 @@ stages:
     # - script: npm run test
     #   displayName: 'npm run test'
 
-  - task: PublishPipelineArtifact@0
-    displayName: 'Publish pipeline artifact'
-    inputs:
-      artifactName: 'drop'
-      targetPath: '$(Build.ArtifactStagingDirectory)'
-
-
+    - task: PublishPipelineArtifact@1
+      displayName: Publish do Artifact
+      inputs:
+        targetPath: './build' 
+        artifactName: $(artifactWebApp)
 
 - stage: DeployInAzureStorage
   displayName: Deploy in Azure Storage
