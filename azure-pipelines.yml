@@ -32,11 +32,11 @@ stages:
     # - script: npm run test
     #   displayName: 'npm run test'
 
-    - task: PublishBuildArtifacts@1
-      displayName: 'Publishing artifact'
-      inputs:
-        PathtoPublish: '$(Pipeline.Workspace)/artifacts'
-        ArtifactName: 'MyArtifact'
+  - task: PublishPipelineArtifact@0
+    displayName: 'Publish pipeline artifact'
+    inputs:
+      artifactName: 'drop'
+      targetPath: '$(Build.ArtifactStagingDirectory)'
 
 
 
